@@ -19,15 +19,15 @@ namespace KeepNotes
 
             note.noteId = DateTime.UtcNow.Ticks.ToString();
 
-            Console.Write("Title :- ");
+            Console.Write("⭕ Title :- ");
             note.title = Console.ReadLine();
 
-            Console.Write("Description :- ");
+            Console.Write("⭕ Description :- ");
             note.description = Console.ReadLine();
 
             char c;
             
-                Console.Write("You want to save note ? (y/n) :- ");
+                Console.Write("⭕ You want to save note ? (y/n) :- ");
                 c = Convert.ToChar(Console.ReadLine());
 
                 switch (c)
@@ -40,7 +40,7 @@ namespace KeepNotes
                     case 'n':
                         break;
                     default:
-                        Console.WriteLine("Enter valid input...");
+                        Console.WriteLine("⚠️ Enter valid input...");
                         break;
                 }
         }
@@ -51,14 +51,39 @@ namespace KeepNotes
             int index = notesList.FindIndex(note => note.noteId == id);
             if (index != -1)
             {
-                notesList.RemoveAt(index);
-                string updatedJsonData = JsonConvert.SerializeObject(notesList, Formatting.Indented);
-                File.WriteAllText(jsonDataFilePath, updatedJsonData);
-                Console.WriteLine("Note deleted successfully...");
+                Console.WriteLine();
+                Console.WriteLine($"Note ID: {notesList[index].noteId}");
+                Console.WriteLine($"Title: {notesList[index].title}");
+                Console.WriteLine($"Description: {notesList[index].description}");
+                Console.WriteLine($"Created At: {notesList[index].createAt}");
+                Console.WriteLine($"Updated At: {notesList[index].updateAt}");
+                Console.WriteLine();
+
+                char c;
+                Console.Write("You want to save note ? (y/n) :- ");
+                c = Convert.ToChar(Console.ReadLine());
+
+                switch (c)
+                {
+                    case 'y':
+                    case 'Y':
+                        notesList.RemoveAt(index);
+                        string updatedJsonData = JsonConvert.SerializeObject(notesList, Formatting.Indented);
+                        File.WriteAllText(jsonDataFilePath, updatedJsonData);
+                        Console.WriteLine("✅ Note deleted successfully...");
+                        fatchNotes();
+                        break;
+                    case 'N':
+                    case 'n':
+                        break;
+                    default:
+                        Console.WriteLine("⚠️ Enter valid input...");
+                        break;
+                }
             }
             else
             {
-                Console.WriteLine("Note not found...");
+                Console.WriteLine("⚠️ Note not found...");
             }
         }
         public void UpdateNote() {
@@ -69,13 +94,13 @@ namespace KeepNotes
             if (index != -1)
             {
                 char c;
-                Console.Write("New Title :- ");
+                Console.Write("⭕ New Title :- ");
                 string tempTitle = Console.ReadLine();
 
-                Console.Write("New Description :- ");
+                Console.Write("⭕ New Description :- ");
                 string tempDescription = Console.ReadLine();
                 
-                Console.Write("You want to save note ? (y/n) :- ");
+                Console.Write("⭕ You want to save note ? (y/n) :- ");
                 c = Convert.ToChar(Console.ReadLine());
 
                 switch (c)
@@ -87,20 +112,20 @@ namespace KeepNotes
                         notesList[index].updateAt = DateTime.Now;
                         string updatedJsonData = JsonConvert.SerializeObject(notesList, Formatting.Indented);
                         File.WriteAllText(jsonDataFilePath, updatedJsonData);
-                        Console.WriteLine("Note updated successfully...");
+                        Console.WriteLine("✅ Note updated successfully...");
                         fatchNotes();
                         break;
                     case 'N':
                     case 'n':
                         break;
                     default:
-                        Console.WriteLine("Enter valid input...");
+                        Console.WriteLine("⚠️ Enter valid input...");
                         break;
                 }
             }
             else
             {
-                Console.WriteLine("Note not found...");
+                Console.WriteLine("⚠️ Note not found...");
             }
         }
         public void ViewNote()
@@ -133,7 +158,7 @@ namespace KeepNotes
             notesList.Add(newData);
             string updatedJsonData = JsonConvert.SerializeObject(notesList, Formatting.Indented);
             File.WriteAllText(jsonDataFilePath, updatedJsonData);
-            Console.WriteLine("Note Saved...");
+            Console.WriteLine("✅ Note Saved...");
         }
     }
 }
