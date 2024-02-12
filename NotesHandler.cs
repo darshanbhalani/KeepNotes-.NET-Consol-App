@@ -109,7 +109,6 @@ namespace KeepNotes
                     case 'Y':
                         if (!string.IsNullOrEmpty(tempTitle)) notesList[index].title= tempTitle;
                         if (!string.IsNullOrEmpty(tempDescription)) notesList[index].description= tempDescription;
-                        
                         notesList[index].updateAt = DateTime.Now;
                         string updatedJsonData = JsonConvert.SerializeObject(notesList, Formatting.Indented);
                         File.WriteAllText(jsonDataFilePath, updatedJsonData);
