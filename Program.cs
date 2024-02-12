@@ -1,4 +1,5 @@
-﻿using static System.Net.Mime.MediaTypeNames;
+﻿using System.Threading.Channels;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace KeepNotes
 {
@@ -6,15 +7,16 @@ namespace KeepNotes
     {
         static void Main(string[] args)
         {
+            
             try
             {
                 int n;
-                Console.WriteLine(new string('_', 20));
-                Console.WriteLine(new string('_', 20));
-                Console.WriteLine($"-::KEEP NOTES ::-");
-                Console.WriteLine(new string('_', 20));
                 do
                 {
+                    Console.WriteLine(new string('_', 20));
+                    Console.WriteLine(new string('_', 20));
+                    Console.WriteLine($"-::KEEP NOTES ::-");
+                    Console.WriteLine(new string('_', 20));
                     Console.WriteLine(new string('_', 20));
                     Console.WriteLine("Press");
                     Console.WriteLine("1 for Add Note");
@@ -52,6 +54,7 @@ namespace KeepNotes
             {
                 Console.WriteLine(e.ToString());
             }
+           
         }
     }
 }

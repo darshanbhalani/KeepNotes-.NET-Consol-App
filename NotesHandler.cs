@@ -95,10 +95,10 @@ namespace KeepNotes
             {
                 char c;
                 Console.Write("⭕ New Title :- ");
-                string tempTitle = Console.ReadLine();
+                string? tempTitle = Console.ReadLine();
 
                 Console.Write("⭕ New Description :- ");
-                string tempDescription = Console.ReadLine();
+                string? tempDescription = Console.ReadLine();
                 
                 Console.Write("⭕ You want to save note ? (y/n) :- ");
                 c = Convert.ToChar(Console.ReadLine());
@@ -107,8 +107,9 @@ namespace KeepNotes
                 {
                     case 'y':
                     case 'Y':
-                        notesList[index].title = tempTitle;
-                        notesList[index].description = tempDescription;
+                        if (!string.IsNullOrEmpty(tempTitle)) notesList[index].title= tempTitle;
+                        if (!string.IsNullOrEmpty(tempDescription)) notesList[index].description= tempDescription;
+                        
                         notesList[index].updateAt = DateTime.Now;
                         string updatedJsonData = JsonConvert.SerializeObject(notesList, Formatting.Indented);
                         File.WriteAllText(jsonDataFilePath, updatedJsonData);
@@ -162,4 +163,3 @@ namespace KeepNotes
         }
     }
 }
-
