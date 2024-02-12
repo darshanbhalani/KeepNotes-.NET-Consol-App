@@ -23,7 +23,7 @@ namespace KeepNotes
                     Console.WriteLine("4 for View Note");
                     Console.WriteLine("0 for Exit");
                     Console.WriteLine(new string('_', 20));
-                    Console.Write("=> ");
+                    Console.Write("⭕ => ");
                     n = Convert.ToInt32(Console.ReadLine());
 
                     NotesHandler notesHandle = new NotesHandler();
