@@ -6,19 +6,26 @@ namespace KeepNotes
     {
         private string jsonDataFilePath = @"C:\\Users\\DARSHAN BHALANI\\Desktop\\Temp C#\\Data.json";
         
-        private List<Note> notesList;
+        private List<Note> notesList= new List<Note>();
 
         public NotesHandler()
         {
             if (!File.Exists(jsonDataFilePath))
             {
-                File.Create(jsonDataFilePath).Close();
+                File.Create(jsonDataFilePath);
             }
         }
         private void fatchNotes()
         {
             string jsonString = File.ReadAllText(jsonDataFilePath);
-            notesList = JsonConvert.DeserializeObject<List<Note>>(jsonString);
+            if(jsonString.Length > 0)
+            {
+                notesList = JsonConvert.DeserializeObject<List<Note>>(jsonString);
+            }
+            else
+            {
+                File.WriteAllText(jsonDataFilePath, "{}");
+            }
         }
 
         public void AddNote()
@@ -105,7 +112,7 @@ namespace KeepNotes
         public void UpdateNote()
         {
             Console.WriteLine(new string('.', 20));
-            if (notesList != null)
+            if (notesList.Count > 0)
             {
                 Console.Write("Enter id :- ");
                 string id = Convert.ToString(Console.ReadLine());
@@ -156,7 +163,7 @@ namespace KeepNotes
         {
             fatchNotes();
             Console.WriteLine(new string('.', 20));
-            if(notesList != null)
+            if(notesList.Count > 0)
             {
                 Console.WriteLine($"Total Notes :- {notesList.Count}");
                 foreach (var note in notesList)
