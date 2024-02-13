@@ -62,7 +62,7 @@ namespace KeepNotes
         public void DeleteNote()
         {
             Console.WriteLine(new string('.', 20));
-            if (notesList != null)
+            if (notesList.Count > 0)
             {
                 Console.Write("Enter id :- ");
                 string id = Convert.ToString(Console.ReadLine());
