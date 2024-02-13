@@ -1,18 +1,18 @@
-﻿using System.Threading.Channels;
-using static System.Net.Mime.MediaTypeNames;
-
-namespace KeepNotes
+﻿namespace KeepNotes
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            
+
             try
             {
                 int n;
                 do
                 {
+                    NotesHandler notesHandle= new NotesHandler();
+
+                    Console.WriteLine("\n");
                     Console.WriteLine(new string('_', 20));
                     Console.WriteLine(new string('_', 20));
                     Console.WriteLine($"-::KEEP NOTES ::-");
@@ -25,10 +25,9 @@ namespace KeepNotes
                     Console.WriteLine("4 for View Note");
                     Console.WriteLine("0 for Exit");
                     Console.WriteLine(new string('_', 20));
-                    Console.Write("⭕ => ");
+                    Console.Write("=> ");
                     n = Convert.ToInt32(Console.ReadLine());
 
-                    NotesHandler notesHandle = new NotesHandler();
                     switch (n)
                     {
                         case 1:
@@ -49,12 +48,12 @@ namespace KeepNotes
                             Console.WriteLine("⚠️ Enter Valid Input...");
                             break;
                     }
+
                 } while (n != 0);
             }catch(Exception e)
             {
-                Console.WriteLine(e.ToString());
+                Console.WriteLine($"Error : {e.Message}");
             }
-           
         }
     }
 }
